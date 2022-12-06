@@ -1,5 +1,7 @@
 package PWD.MNGR.COMMANDS;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -20,11 +22,7 @@ public class PasswordPersistenceTest {
 	@BeforeAll
 	public void setup() {
 
-		Configuration configuration = new Configuration().addAnnotatedClass(Password.class)
-				.setProperty("hibernate.connection.driver_class", "org.sqlite.JDBC")
-				.setProperty("hibernate.connection.url", "jdbc:sqlite:test.db")
-				.setProperty("hibernate.dialect", "org.hibernate.dialect.SQLiteDialect")
-				.setProperty("hibernate.show_sql", "true").setProperty("hibernate.hdm2ddl.auto", "create-drop");
+		Configuration configuration = new Configuration().addAnnotatedClass(Password.class);
 		configuration.configure();
 
 		factory = new Configuration().configure().buildSessionFactory();
@@ -32,28 +30,32 @@ public class PasswordPersistenceTest {
 
 	@Test
 	public void savePassword() {
-		Password message = new Password("test", "xyz");
+		Password password = new Password("test", "xyz");
 		Session session = factory.openSession();
 		Transaction tx = session.beginTransaction();
-		session.persist(message);
+		session.persist(password);
+	
+	    List<Password> list = (List<Password>) session.createQuery("from Password").list();
+		
+		assertEquals(list.size() > 1, true);		
+	
+		for (Password m : list) {
+			System.out.println(m);
+		}
+		
 		tx.commit();
 		session.close();
 	}
 
-	@Test()
+	//@Test()
 	public void readMessage() {
 		Session session = factory.openSession();
 		@SuppressWarnings("unchecked")
 		List<Password> list = (List<Password>) session.createQuery("from Password").list();
-		if (list.size() > 1) {
-//        	asser
-//            Assert.fail("Message configuration in error; table should contain only one."
-//                    +" Set ddl to create-drop.");
-		}
-		if (list.size() == 0) {
-//            Assert.fail("Read of initial message failed; check saveMessage() for errors."
-//                    +" How did this test run?");
-		}
+		
+		assertEquals(list.size() > 1, true);
+		
+	
 		for (Password m : list) {
 			System.out.println(m);
 		}

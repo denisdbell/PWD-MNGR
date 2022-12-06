@@ -17,6 +17,16 @@ public class Password {
 	@Column(nullable = false)
 	String value;
 	
+	public Password() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Password(Long id, String name, String value) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.value = value;
+	}
 	public Password(String name, String value) {
 		super();		
 		this.name = name;

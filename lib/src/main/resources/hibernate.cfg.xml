@@ -4,12 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:sqlite:test.db</property>
+        <property name="connection.url">jdbc:sqlite:/home/osboxes/Documents/PWD-MNGR/lib/src/main/resources/pwdmngr.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="current_session_context_class">thread</property>
  		<!-- DB schema will be updated if needed -->
-        <property name="hbm2ddl.auto">update</property>        
+       
+        <property name="hbm2ddl.auto">create</property>        
         <mapping class="PWD.MNGR.MODELS.Password"/>       
     </session-factory>
 </hibernate-configuration>
