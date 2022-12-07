@@ -10,14 +10,17 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Command(
-	name = "Add Password",
-	description = "Add Password to the database"
+	name = "Update Password",
+	description = "Update Password"
 )
-public class AddPasswordCommand implements Runnable {
+public class UpdatePasswordCommand implements Runnable {
 
 	Configuration configuration;
 	SessionFactory factory;
 	DataBase dataBase = new DataBase();
+	
+	@Parameters
+	Long id;
 	
 	@Parameters
 	String name;
@@ -26,13 +29,13 @@ public class AddPasswordCommand implements Runnable {
 	String value;
 		
 	public static void main(String[] args) {
-		int exitCde = new CommandLine(new AddPasswordCommand()).execute(args);
+		int exitCde = new CommandLine(new UpdatePasswordCommand()).execute(args);
 		System.exit(exitCde);
 	}
 	
 	@Override
 	public void run() {
-		dataBase.addPassword(name,value);
-		System.out.println("Password added successfully");
+		dataBase.updatePassword(id,name,value);
+		System.out.println("Password updated successfully");
 	}
 }

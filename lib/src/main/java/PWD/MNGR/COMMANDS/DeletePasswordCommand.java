@@ -9,30 +9,23 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
-@Command(
-	name = "Add Password",
-	description = "Add Password to the database"
-)
-public class AddPasswordCommand implements Runnable {
+@Command
+public class DeletePasswordCommand implements Runnable {
 
 	Configuration configuration;
 	SessionFactory factory;
 	DataBase dataBase = new DataBase();
 	
 	@Parameters
-	String name;
+	Long id;
 	
-	@Parameters
-	String value;
-		
 	public static void main(String[] args) {
-		int exitCde = new CommandLine(new AddPasswordCommand()).execute(args);
+		int exitCde = new CommandLine(new DeletePasswordCommand()).execute(args);
 		System.exit(exitCde);
 	}
 	
 	@Override
 	public void run() {
-		dataBase.addPassword(name,value);
-		System.out.println("Password added successfully");
+		dataBase.deletePassword(id);
 	}
 }
