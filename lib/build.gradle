@@ -11,6 +11,8 @@ plugins {
     id 'java-library'
 }
 
+apply plugin : "java" 
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -51,6 +53,20 @@ dependencies {
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.1'    
     
     implementation group: 'org.javassist', name: 'javassist', version: '3.29.2-GA'
+}
+
+def getDate() {
+	new Date().format('yyyyMMddHHmmssSSS')
+}
+
+task customFatJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'PWD.MNGR.MainCommand'
+    }
+    baseName = "pwdmngr_${getDate()}"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
 
 tasks.named('test') {

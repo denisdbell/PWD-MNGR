@@ -17,11 +17,10 @@ public class DataBase {
 	SessionFactory factory;
 	
 	public void setUpConnection() {
-		Configuration configuration = new Configuration().addAnnotatedClass(Password.class);
+		Configuration configuration = new Configuration().addAnnotatedClass(Password.class).setProperty("connection.url", "jdbc:sqlite:/home/osboxes/Documents/PWD-MNGR/lib/src/main/resources/pwdmngr.db");
 		configuration.configure();
 
 		factory = new Configuration().configure().buildSessionFactory();
-
 	}
 	
 	public void addPassword(String name, String value) {
