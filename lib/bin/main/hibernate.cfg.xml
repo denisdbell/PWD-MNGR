@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:sqlite:/home/osboxes/Documents/PWD-MNGR/lib/src/main/resources/pwdmngr.db</property>
+        <property name="connection.url">jdbc:sqlite:pwdmngr.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="current_session_context_class">thread</property>

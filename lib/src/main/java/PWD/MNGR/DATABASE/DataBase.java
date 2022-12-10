@@ -47,7 +47,7 @@ public class DataBase {
 		}
 		
 		for (Password p : list) {
-			System.out.println(p.getId() + " " + p.getName() + " " + p.getValue());
+			System.out.println("<pid>: " + p.getId() + " <Name:>               " + p.getName() + "               <Password:>               " + p.getValue());
 		}
 		
 		session.close();

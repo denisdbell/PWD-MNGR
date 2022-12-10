@@ -1,6 +1,8 @@
 package PWD.MNGR;
 
 
+import java.util.logging.LogManager;
+
 import PWD.MNGR.COMMANDS.AddPasswordCommand;
 import PWD.MNGR.COMMANDS.DeletePasswordCommand;
 import PWD.MNGR.COMMANDS.ListPasswordCommand;
@@ -24,6 +26,9 @@ public class MainCommand implements Runnable {
 	String[] arguments;
 		
 	public static void main(String[] args) {
+		//Disable logging
+		LogManager.getLogManager().reset();
+		
 		int exitCde = new CommandLine(new MainCommand()).execute(args);
 		System.exit(exitCde);
 	}
